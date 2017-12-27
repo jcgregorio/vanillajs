@@ -1,0 +1,30 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a{
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+html{
+  font: normal 16px sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+.container{
+  padding: 27px 20px;
+  margin: 30px auto 50px;
+  max-width: 1250px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  background-color: #fff;
+  box-shadow: 0 0 1px #ccc;
+}

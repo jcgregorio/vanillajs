@@ -1,0 +1,38 @@
+post-van .thumbnail {
+    display: block;
+    flex: 0 0 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-right: 10px;
+    border-radius: 4px;
+    margin-right: 12px;
+}
+
+post-van .details {
+    display: flex;
+    flex-direction: column;
+}
+
+post-van .details .title {
+    font-size: 15px;
+    margin-bottom: 3px;
+    color: #04477b;
+}
+
+post-van .details .title:visited {
+    color: purple;
+}
+
+post-van .details .action-buttons a {
+    font-size: 11px;
+    margin-right: 4px;
+    display: inline-block;
+    color: #666;
+}
+
+post-van .details .action-buttons i {
+    font-size: 10px;
+    margin-right: 1px;
+}
