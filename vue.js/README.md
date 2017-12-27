@@ -8,8 +8,8 @@ Prereqs
 
 You should have the following installed:
 
-1. Node - A version late enough to have npx.
-2. Yarn.
+1. node - A version late enough to have npx.
+2. yarn.
 
 Running
 =======
@@ -47,6 +47,37 @@ Contents
     └── webpack.config.js
 
 
+The `src` directory contains the starting code for the application, with
+`index.js` being the entry point for webpack.
+
+```javascript
+import '../elements/subreddit-van.webpack.js'
+import '../elements/post-van.webpack.js'
+import './index.css'
+```
+
+Just like in the tutorialzine application the functionality is broken down
+into two components, in this case we make them custom elements. Note that each
+element is included via `*.webpack.js` file. This is just a convention where
+each such file contains all the includes needed for that element. For example,
+the `elements/post-van.webpack.js` file contains both the CSS and the JS
+needed to use the `<post-van>` element.
+
+
+```javascript
+import './post-van.css'
+import './post-van.js'
+```
+
+The two elements also work in the same was as the tutorialize application, the
+`<subreddit-van>` element takes a single attribute that controls which
+subreddit it should query, and the `<post-van>` element has a single property
+`item` that takes the parsed JSON description of a reddit post.
+
+The CSS from the original article has remain mostly unchanged, outside of
+breaking it into separate files so they can be logically associated with the
+custom element they are styling.
+
 Caveats
 =======
 
@@ -57,5 +88,5 @@ Caveats
    browser version, compile the JS back to an older version of ES, and run a
    prefixer on the CSS. The wider the target set of browsers and the older the
    versions you are targeting the more processing you will need to do via
-   WebPack, but since the original code doesn't need to change, those extra
+   webpack, but since the original code doesn't need to change, those extra
    processing steps are out of scope for this example.
