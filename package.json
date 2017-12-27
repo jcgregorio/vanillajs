@@ -9,9 +9,5 @@
     "uglifyjs-webpack-plugin": "^1.1.4",
     "webpack": "3.10.0",
     "webpack-dev-server": "^3.0.0-alpha6"
-  },
-  "scripts": {
-    "build": "webpack",
-    "dev": "webpack-dev-server"
   }
 }
