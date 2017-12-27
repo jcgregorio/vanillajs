@@ -1,14 +1,14 @@
 Vue.js
 ======
 
-This is a rewrite of the Vue.js sample app from (tutorialzine)[https://tutorialzine.com/2016/08/building-your-first-app-with-vue-js].
+This is a rewrite of the Vue.js sample app from [tutorialzine](https://tutorialzine.com/2016/08/building-your-first-app-with-vue-js).
 
 Prereqs
 =======
 
 You should have the following installed:
 
-1. node - A version late enough to have npx.
+1. node - A version recent enough to have npx.
 2. yarn.
 
 Running
