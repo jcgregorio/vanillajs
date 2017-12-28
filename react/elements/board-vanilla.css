@@ -13,10 +13,6 @@ square-vanilla {
   width: 34px;
 }
 
-.kbd-navigation square-vanilla:focus {
-  background: #ddd;
-}
-
 board-vanilla {
   display: flex;
   flex-direction: column;

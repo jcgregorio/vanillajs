@@ -1,3 +1,17 @@
 game-vanilla {
-  display: block;
+  display: flex;
+  flex-direction: row;
+}
+
+game-vanilla .game-info {
+  margin: 20px;
+}
+
+game-vanilla .status {
+  margin-bottom: 10px;
+}
+
+game-vanilla ol,
+game-vanilla ul {
+  padding-left: 30px;
 }

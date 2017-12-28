@@ -45,11 +45,13 @@ function squaresFrom(state) {
 
 const template = (state) => html`
   <board-vanilla squares=${squaresFrom(state)}></board-vanilla>
-  <div className="game-info"></div>
-	<div>${statusFrom(squaresFrom(state), state.xIsNext)}</div>
-	<ol>
-    ${state.history.map((step, move) => html`<li><button data-id$=${move}>${desc(move)}</button></li>`)}
-	</ol>`;
+  <div class="game-info">
+    <div>${statusFrom(squaresFrom(state), state.xIsNext)}</div>
+    <ol>
+      ${state.history.map((step, move) => html`<li><button data-id$=${move}>${desc(move)}</button></li>`)}
+    </ol>
+  </div>
+`;
 
 window.customElements.define('game-vanilla', class extends HTMLElement {
 	constructor() {

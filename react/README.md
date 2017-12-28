@@ -27,6 +27,39 @@ All the production assets will appear in the `./dist` directory.
 Contents
 ========
 
+		.
+		├── elements
+		│   ├── board-vanilla.css
+		│   ├── board-vanilla.js
+		│   ├── board-vanilla.webpack.js
+		│   ├── game-vanilla.css
+		│   ├── game-vanilla.js
+		│   └── game-vanilla.webpack.js
+		├── Makefile
+		├── package.json
+		├── src
+		│   ├── index.css
+		│   ├── index.html
+		│   └── index.js
+		└── webpack.config.js
+
+The `src` directory contains the starting code for the application, with
+`index.js` being the entry point for webpack.
+
+```javascript
+import '../elements/board-vanilla.webpack.js'
+import '../elements/game-vanilla.webpack.js'
+import './index.css'
+```
+
+Just like in the React tutorial we break this down into components, in this
+case custom elements. Note that each element is included via `*.webpack.js`
+file. This is just a convention where each such file contains all the
+includes needed for that element. For example, the
+`elements/board-vanilla.webpack.js` file contains both the CSS and the JS
+needed to use the `<board-vanilla>` element. All custom elements must have
+a '-' in their name, and I've adopted the convention of appending
+'-vanilla'.
 
 
 Caveats
