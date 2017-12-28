@@ -1,4 +1,4 @@
-import { html, render } from '../node_modules/lit-html/lit-html.js'
+import { html, render } from '../node_modules/lit-html/lib/lit-extended.js'
 
 window.customElements.define('square-vanilla', class extends HTMLElement {});
 
@@ -22,7 +22,6 @@ const template = (squares) => html`
 
 window.customElements.define('board-vanilla', class extends HTMLElement {
   set squares(s) {
-    console.log(s);
     render(template(s), this);
   }
 
