@@ -85,6 +85,82 @@ have used a stand-alone templating library like
 [lit-html](https://github.com/PolymerLabs/lit-html), but since the contents of
 the elements don't change, there isn't much benefit.
 
+The subreddit-van custom element registers for callbacks when its 'name'
+attribute changes, and when it does change it uses the `fetch()` API to
+retrieve the subreddit information and parcel it out to `post-van` child
+elements.
+
+```javascript
+window.customElements.define('subreddit-van', class extends HTMLElement {
+  // Only get callbacks when our 'name' attribute changes.
+  static get observedAttributes() { return ['name']; }
+
+  // Called when our 'name' attribute changes.
+  attributeChangedCallback(attr, oldValue, newValue) {
+    if (newValue === '') {
+      return
+    }
+    fetch(`https://www.reddit.com/r/${ newValue }/top.json?limit=5`).then(resp => {
+      resp.json().then(json => {
+        this.innerHTML=`<h2>${ newValue.toUpperCase() }</h2>`;
+        json.data.children.forEach(item => {
+          let ele = document.createElement('post-van');
+          ele.item = item;
+          this.appendChild(ele);
+        });
+      });
+    });
+  }
+
+  // Provide default content before the reddit content is loaded.
+  connectedCallback() {
+    this.textContent = 'Loading...';
+  }
+});
+```
+
+The implementation of `post-van` is even simpler, mostly being a single large
+template literal.
+
+```javascript
+window.customElements.define('post-van', class extends HTMLElement {
+  // Called when our 'item' property is set.
+  set item(it) {
+    this.innerHTML = `
+      <a  href="${it.data.url}" style="${this._getImageBackgroundCSS(it.data.thumbnail)}"
+    target="_blank" class="thumbnail"></a>
+
+      <div class="details">
+        <a href="${it.data.url}" title="${it.data.title}" target="_blank" class="title">
+        ${ it.data.title.substring(0, 60) }
+        </a>
+
+        <div class="action-buttons">
+          <a href="http://reddit.com${ it.data.permalink }" title="Vote">
+            <i class="material-icons">thumbs_up_down</i>
+            ${it.data.score}
+          </a>
+
+          <a href="http://reddit.com${ it.data.permalink }" title="Go to discussion">
+            <i class="material-icons">forum</i>
+            ${it.data.num_comments}
+          </a>
+        </div>
+      </div>
+    `;
+  }
+
+  // Used in the template literal for item().
+  _getImageBackgroundCSS(img) {
+    if (!img || img==='self' || img==='nsfw') {
+      img = 'images/placeholder.png';
+    }
+    return `background-image: url(${ img })`;
+  }
+
+});
+```
+
 
 Caveats
 =======

@@ -25,7 +25,7 @@ window.customElements.define('post-van', class extends HTMLElement {
     `;
   }
 
-  // Used in the template literal.
+  // Used in the template literal for item().
   _getImageBackgroundCSS(img) {
     if (!img || img==='self' || img==='nsfw') {
       img = 'images/placeholder.png';
