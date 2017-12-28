@@ -61,7 +61,9 @@ into two components, in this case we make them custom elements. Note that each
 element is included via `*.webpack.js` file. This is just a convention where
 each such file contains all the includes needed for that element. For example,
 the `elements/post-van.webpack.js` file contains both the CSS and the JS
-needed to use the `<post-van>` element.
+needed to use the `<post-van>` element. All custom elements must have
+a '-' in their name, and I've adopted the convention of appending '-van' for
+vanilla.
 
 
 ```javascript
@@ -77,6 +79,12 @@ subreddit it should query, and the `<post-van>` element has a single property
 The CSS from the original article has remain mostly unchanged, outside of
 breaking it into separate files so they can be logically associated with the
 custom element they are styling.
+
+Note that for both the implementations of post-van and subreddit-van could
+have used a stand-alone templating library like
+[lit-html](https://github.com/PolymerLabs/lit-html), but since the contents of
+the elements don't change, there isn't much benefit.
+
 
 Caveats
 =======

@@ -102,23 +102,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports) {
 
 window.customElements.define('subreddit-van', class extends HTMLElement {
+  // Only get callbacks when our 'name' attribute changes.
   static get observedAttributes() { return ['name']; }
 
+  // Called when our 'name' attribute changes.
   attributeChangedCallback(attr, oldValue, newValue) {
-    if (attr == 'name' && newValue != '') {
-      fetch(`https://www.reddit.com/r/${ newValue }/top.json?limit=5`).then(resp => {
-        resp.json().then(json => {
-          this.innerHTML=`<h2>${ newValue.toUpperCase() }</h2>`;
-          json.data.children.forEach(item => {
-            let ele = document.createElement('post-van');
-            ele.item = item;
-            this.appendChild(ele);
-          });
+    if (newValue === '') {
+      return
+    }
+    fetch(`https://www.reddit.com/r/${ newValue }/top.json?limit=5`).then(resp => {
+      resp.json().then(json => {
+        this.innerHTML=`<h2>${ newValue.toUpperCase() }</h2>`;
+        json.data.children.forEach(item => {
+          let ele = document.createElement('post-van');
+          ele.item = item;
+          this.appendChild(ele);
         });
       });
-    }
+    });
   }
 
+  // Provide default content before the reddit content is loaded.
   connectedCallback() {
     this.textContent = 'Loading...';
   }
@@ -148,18 +152,11 @@ window.customElements.define('subreddit-van', class extends HTMLElement {
 /* 6 */
 /***/ (function(module, exports) {
 
-function getImageBackgroundCSS(img) {
-  if (img && img!='self' && img!='nsfw') {
-    return 'background-image: url(' + img + ')';
-  } else {
-    return 'background-image: url(images/placeholder.png)';
-  }
-}
-
 window.customElements.define('post-van', class extends HTMLElement {
+  // Called when our 'item' property is set.
   set item(it) {
     this.innerHTML = `
-      <a  href="${it.data.url}" style="${getImageBackgroundCSS(it.data.thumbnail)}"
+      <a  href="${it.data.url}" style="${this._getImageBackgroundCSS(it.data.thumbnail)}"
     target="_blank" class="thumbnail"></a>
 
       <div class="details">
@@ -181,6 +178,15 @@ window.customElements.define('post-van', class extends HTMLElement {
       </div>
     `;
   }
+
+  // Used in the template literal.
+  _getImageBackgroundCSS(img) {
+    if (!img || img==='self' || img==='nsfw') {
+      img = 'images/placeholder.png';
+    }
+    return `background-image: url(${ img })`;
+  }
+
 });
 
 

@@ -1,15 +1,8 @@
-function getImageBackgroundCSS(img) {
-  if (img && img!='self' && img!='nsfw') {
-    return 'background-image: url(' + img + ')';
-  } else {
-    return 'background-image: url(images/placeholder.png)';
-  }
-}
-
 window.customElements.define('post-van', class extends HTMLElement {
+  // Called when our 'item' property is set.
   set item(it) {
     this.innerHTML = `
-      <a  href="${it.data.url}" style="${getImageBackgroundCSS(it.data.thumbnail)}"
+      <a  href="${it.data.url}" style="${this._getImageBackgroundCSS(it.data.thumbnail)}"
     target="_blank" class="thumbnail"></a>
 
       <div class="details">
@@ -31,4 +24,13 @@ window.customElements.define('post-van', class extends HTMLElement {
       </div>
     `;
   }
+
+  // Used in the template literal.
+  _getImageBackgroundCSS(img) {
+    if (!img || img==='self' || img==='nsfw') {
+      img = 'images/placeholder.png';
+    }
+    return `background-image: url(${ img })`;
+  }
+
 });
