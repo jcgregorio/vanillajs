@@ -1,6 +1,6 @@
 import { html, render } from '../node_modules/lit-html/lib/lit-extended.js'
 
-// Declare some functions that are used in the template.
+// Declare some functions that are used in templating.
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
@@ -43,6 +43,7 @@ function squaresFrom(state) {
   return state.history[state.stepNumber].squares;
 }
 
+// Now define the template that uses the above functions.
 const template = (state) => html`
   <board-vanilla squares=${squaresFrom(state)}></board-vanilla>
   <div class="game-info">

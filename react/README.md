@@ -61,6 +61,152 @@ needed to use the `<board-vanilla>` element. All custom elements must have
 a '-' in their name, and I've adopted the convention of appending
 '-vanilla'.
 
+The `<square-vanilla>` element is the simplest custom element of all:
+
+```javascript
+window.customElements.define('square-vanilla', class extends HTMLElement {});
+```
+
+Defining such an element still has value as we can use it for styling,
+and for detecting the source of events. For example, see `handleEvent()`
+in the definition of the `board-vanilla` element:
+
+```javascript
+const template = (squares) => html`
+<div class=boardRow>
+  <square-vanilla index=0>${squares[0]}</square-vanilla>
+  <square-vanilla index=1>${squares[1]}</square-vanilla>
+  <square-vanilla index=2>${squares[2]}</square-vanilla>
+</div>
+<div class=boardRow>
+  <square-vanilla index=3>${squares[3]}</square-vanilla>
+  <square-vanilla index=4>${squares[4]}</square-vanilla>
+  <square-vanilla index=5>${squares[5]}</square-vanilla>
+</div>
+<div class=boardRow>
+  <square-vanilla index=6>${squares[6]}</square-vanilla>
+  <square-vanilla index=7>${squares[7]}</square-vanilla>
+  <square-vanilla index=8>${squares[8]}</square-vanilla>
+</div>
+`;
+
+window.customElements.define('board-vanilla', class extends HTMLElement {
+  set squares(s) {
+    render(template(s), this);
+  }
+
+  connectedCallback() {
+    this.addEventListener('click', this);
+		this._upgradeProperty('squares');
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener('click', this);
+  }
+
+  handleEvent(e) {
+    if (e.target.tagName != 'SQUARE-VANILLA') {
+      return
+    }
+    if (e.target.textContent != '') {
+      return
+    }
+    this.dispatchEvent(new CustomEvent('square-click', {bubbles: true, detail: +e.target.getAttribute('index')}));
+  }
+
+	_upgradeProperty(prop) {
+		if (this.hasOwnProperty(prop)) {
+			let value = this[prop];
+			delete this[prop];
+			this[prop] = value;
+		}
+	}
+});
+```
+
+The templating in both the `board-vanilla` and `game-vanilla` elements
+is handled by the (lit-html)[https://github.com/PolymerLabs/lit-html] library.
+
+The `game-vanilla` element only needs simple state management, so we just
+define a simple `setState` function. If state management was more complex you
+could always bring in a library such as (Redux)[https://redux.js.org/].
+
+```javascript
+window.customElements.define('game-vanilla', class extends HTMLElement {
+	constructor() {
+		super();
+		this.state = {};
+	}
+
+  connectedCallback() {
+    this.setState({
+			history: [
+				{
+					squares: Array(9).fill('')
+				}
+			],
+			stepNumber: 0,
+			xIsNext: true
+		});
+    this.addEventListener('square-click', this);
+    this.addEventListener('click', this);
+	}
+
+  disconnectedCallback() {
+    this.removeEventListener('square-click', this);
+    this.removeEventListener('click', this);
+  }
+
+	setState(newState) {
+    for (const key in newState) {
+			this.state[key] = newState[key];
+		}
+    this.render();
+	}
+
+	render() {
+    render(template(this.state), this);
+	}
+
+	handleEvent(e) {
+    if (e.type == 'click' && e.target.nodeName == 'BUTTON') {
+      this.jumpTo(+e.target.dataset.id);
+		} else if (e.type == 'square-click') {
+      this.clickSquare(e.detail);
+		}
+	}
+
+  clickSquare(square) {
+    const history = this.state.history.slice(0, this.state.stepNumber + 1);
+    const current = history[history.length - 1];
+    const squares = current.squares.slice();
+    if (calculateWinner(squares) || squares[square]) {
+      return;
+    }
+    squares[square] = this.state.xIsNext ? "X" : "O";
+    this.setState({
+      history: history.concat([
+        {
+          squares: squares
+        }
+      ]),
+      stepNumber: history.length,
+      xIsNext: !this.state.xIsNext
+    });
+  }
+
+	jumpTo(step) {
+		this.setState({
+      stepNumber: step,
+		  xIsNext: (step % 2) === 0,
+		});
+	}
+
+});
+```
+
+Compared to React code this is much more modular, the JS, CSS, and templates
+for each component are all kept together.
 
 Caveats
 =======
