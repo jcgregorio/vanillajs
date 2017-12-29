@@ -11,15 +11,16 @@ There are two ported projects so far:
 Vue.js
 ------
 
-The [Vue.js sample app rewrite](/tree/master/vue.js)  is the simplest port,
-using no external libraries at all, and using template literals for
-templating.
+The [Vue.js sample app rewrite](https://github.com/jcgregorio/vanillajs/tree/master/vue.js)
+is the simplest port, using no external libraries at all, and using template
+literals for templating.
 
 React
 -----
 
-The [React sample app rewrite](/tree/master/react) uses only one additional
-library, [lit-html](https://github.com/PolymerLabs/lit-html) for templating.
+The [React sample app rewrite](https://github.com/jcgregorio/vanillajs/tree/master/react)
+uses only one additional library,
+[lit-html](https://github.com/PolymerLabs/lit-html) for templating.
 
 Caveats
 =======
