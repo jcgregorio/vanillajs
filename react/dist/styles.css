@@ -1,0 +1,41 @@
+square-vanilla {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
+
+board-vanilla {
+  display: flex;
+  flex-direction: column;
+}
+
+game-vanilla {
+  display: flex;
+  flex-direction: row;
+}
+
+game-vanilla .game-info {
+  margin: 20px;
+}
+
+game-vanilla .status {
+  margin-bottom: 10px;
+}
+
+game-vanilla ol,
+game-vanilla ul {
+  padding-left: 30px;
+}
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+}
