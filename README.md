@@ -6,6 +6,20 @@ a JavaScript framework and have been reimplemented here using vanilla JS.
 The point of this project is to show the native power of the browser and to
 try to dispel the notion that building for the web requires a framework.
 
+There are two ported projects so far:
+
+Vue.js
+------
+
+The [Vue.js sample app rewrite](/tree/master/vue.js)  is the simplest port,
+using no external libraries at all, and using template literals for
+templating.
+
+React
+-----
+
+The [React sample app rewrite](/tree/master/react) uses only one additional
+library, [lit-html](https://github.com/PolymerLabs/lit-html) for templating.
 
 Caveats
 =======

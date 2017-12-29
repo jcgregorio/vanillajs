@@ -208,6 +208,14 @@ window.customElements.define('game-vanilla', class extends HTMLElement {
 Compared to React code this is much more modular, the JS, CSS, and templates
 for each component are all kept together.
 
+The communication between components is slightly different than in the
+original React code. In this rewrite, the `board-vanilla` element generates a
+`square-click` event when a square has been clicked, and the index of the
+square that's been clicked is passed along in the event detail. Events and DOM
+position are two of the six surfaces you have at hand when stitching
+applications together using custom elements. The full six are detailed in my
+[Six Places](https://bitworking.org/news/2015/03/Six_Places) blog post.
+
 Caveats
 =======
 
