@@ -97,7 +97,7 @@ window.customElements.define('board-vanilla', class extends HTMLElement {
 
   connectedCallback() {
     this.addEventListener('click', this);
-		this._upgradeProperty('squares');
+    this._upgradeProperty('squares');
   }
 
   disconnectedCallback() {
@@ -114,13 +114,13 @@ window.customElements.define('board-vanilla', class extends HTMLElement {
     this.dispatchEvent(new CustomEvent('square-click', {bubbles: true, detail: +e.target.getAttribute('index')}));
   }
 
-	_upgradeProperty(prop) {
-		if (this.hasOwnProperty(prop)) {
-			let value = this[prop];
-			delete this[prop];
-			this[prop] = value;
-		}
-	}
+  _upgradeProperty(prop) {
+    if (this.hasOwnProperty(prop)) {
+      let value = this[prop];
+      delete this[prop];
+      this[prop] = value;
+    }
+  }
 });
 ```
 
@@ -133,48 +133,48 @@ could always bring in a library such as (Redux)[https://redux.js.org/].
 
 ```javascript
 window.customElements.define('game-vanilla', class extends HTMLElement {
-	constructor() {
-		super();
-		this.state = {};
-	}
+  constructor() {
+    super();
+    this.state = {};
+  }
 
   connectedCallback() {
     this.setState({
-			history: [
-				{
-					squares: Array(9).fill('')
-				}
-			],
-			stepNumber: 0,
-			xIsNext: true
-		});
+      history: [
+        {
+          squares: Array(9).fill('')
+        }
+      ],
+      stepNumber: 0,
+      xIsNext: true
+      });
     this.addEventListener('square-click', this);
     this.addEventListener('click', this);
-	}
+    }
 
   disconnectedCallback() {
     this.removeEventListener('square-click', this);
     this.removeEventListener('click', this);
   }
 
-	setState(newState) {
+  setState(newState) {
     for (const key in newState) {
-			this.state[key] = newState[key];
-		}
+      this.state[key] = newState[key];
+    }
     this.render();
-	}
+  }
 
-	render() {
+  render() {
     render(template(this.state), this);
-	}
+  }
 
-	handleEvent(e) {
+  handleEvent(e) {
     if (e.type == 'click' && e.target.nodeName == 'BUTTON') {
       this.jumpTo(+e.target.dataset.id);
-		} else if (e.type == 'square-click') {
+    } else if (e.type == 'square-click') {
       this.clickSquare(e.detail);
-		}
-	}
+    }
+  }
 
   clickSquare(square) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
@@ -195,12 +195,12 @@ window.customElements.define('game-vanilla', class extends HTMLElement {
     });
   }
 
-	jumpTo(step) {
-		this.setState({
+  jumpTo(step) {
+    this.setState({
       stepNumber: step,
-		  xIsNext: (step % 2) === 0,
-		});
-	}
+      xIsNext: (step % 2) === 0,
+    });
+  }
 
 });
 ```
