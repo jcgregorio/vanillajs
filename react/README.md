@@ -125,11 +125,11 @@ window.customElements.define('board-vanilla', class extends HTMLElement {
 ```
 
 The templating in both the `board-vanilla` and `game-vanilla` elements
-is handled by the (lit-html)[https://github.com/PolymerLabs/lit-html] library.
+is handled by the [lit-html](https://github.com/PolymerLabs/lit-html) library.
 
 The `game-vanilla` element only needs simple state management, so we just
 define a simple `setState` function. If state management was more complex you
-could always bring in a library such as (Redux)[https://redux.js.org/].
+could always bring in a library such as [Redux](https://redux.js.org/).
 
 ```javascript
 window.customElements.define('game-vanilla', class extends HTMLElement {
