@@ -22,6 +22,13 @@ The [React sample app rewrite](https://github.com/jcgregorio/vanillajs/tree/mast
 uses only one additional library,
 [lit-html](https://github.com/PolymerLabs/lit-html) for templating.
 
+Angular TODO
+------------
+
+The [Angular TODO app rewrite](https://github.com/jcgregorio/vanillajs/tree/master/angular-todo)
+uses only one additional library,
+[hyper-html](https://github.com/WebReflection/hyperHTML) for templating.
+
 Caveats
 =======
 

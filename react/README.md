@@ -1,7 +1,7 @@
 React
 =====
 
-This is a rewrite if the React sample app developed in the [React Tutorial](https://reactjs.org/tutorial/tutorial.html).
+This is a rewrite of the React sample app developed in the [React Tutorial](https://reactjs.org/tutorial/tutorial.html).
 
 Prereqs
 =======
