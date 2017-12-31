@@ -27,7 +27,7 @@ Angular TODO
 
 The [Angular TODO app rewrite](https://github.com/jcgregorio/vanillajs/tree/master/angular-todo)
 uses only one additional library,
-[hyper-html](https://github.com/WebReflection/hyperHTML) for templating.
+[hyperHTML](https://github.com/WebReflection/hyperHTML) for templating.
 
 Caveats
 =======
