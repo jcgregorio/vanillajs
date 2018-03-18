@@ -60,7 +60,7 @@ of appending '-vanilla'.
 There is only one element and that's the `<todo-vanilla>` element:
 
 ```javascript
-import { bind, wire } from  '../node_modules/hyperhtml/esm/index.js'
+import { bind, wire } from  'hyperhtml/esm/index.js'
 
 window.customElements.define('todo-vanilla', class extends HTMLElement {
 
