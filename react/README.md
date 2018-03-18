@@ -60,13 +60,13 @@ import '../modules/game-vanilla'
 import './index.css'
 ```
 
-Just like in the React tutorial we break this down into components, in this
-case custom elements. Note that each element is included via
-`../modules/{element-name}` directory. This is just a convention where each
-such file contains all the includes needed for that element. For example, the
-`elements/board-vanilla/index.js` file contains both the CSS and the JS needed
-to use the `<board-vanilla>` element. All custom elements must have a '-' in
-their name, and I've adopted the convention of appending '-vanilla'.
+We break this down into components, in this case custom elements. Note that
+each element is included via `../modules/{element-name}` directory. This is
+just a convention where each such file contains all the includes needed for
+that element. For example, the `elements/board-vanilla/index.js` file contains
+both the CSS and the JS needed to use the `<board-vanilla>` element. All
+custom elements must have a '-' in their name, and I've adopted the convention
+of appending '-vanilla'.
 
 The `<square-vanilla>` element is the simplest custom element of all:
 

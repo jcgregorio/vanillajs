@@ -1,4 +1,4 @@
-input:checked + span {
+todo-vanilla input:checked + span {
   text-decoration: line-through;
   color: grey;
 }

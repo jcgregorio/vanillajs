@@ -1,8 +1,6 @@
-import './index.css'
-import { bind, wire } from  '../node_modules/hyperhtml/esm/index.js'
+import { bind, wire } from  'hyperhtml/esm/index.js'
 
 window.customElements.define('todo-vanilla', class extends HTMLElement {
-
   connectedCallback() {
     this.todos = [
       {text:'learn AngularJS', done:true},

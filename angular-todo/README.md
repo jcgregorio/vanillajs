@@ -18,34 +18,48 @@ Running
 
 To install all dependencies and run the developement server:
 
-     $ make dev
+     $ make serve
 
 To build the production version of the assets:
 
-     $ make
+     $ make release
 
 All the production assets will appear in the `./dist` directory.
-
 
 Contents
 ========
 
     ├── Makefile
+    ├── modules
+    │   └── todo-vanilla
+    │       ├── index.js
+    │       ├── todo-vanilla.css
+    │       └── todo-vanilla.js
     ├── package.json
-    ├── src
-    │   ├── index.css
+    ├── pages
     │   ├── index.html
     │   └── index.js
+    ├── README.md
     └── webpack.config.js
 
-The `src` directory contains the starting code for the application, with
-`index.js` being the entry point. Since this example only contains a single
-element definition we just put it here, as opposed to the other sample apps
-which had mulitple elements that were broken out under an `elements`
-directory.
+The `pages` directory contains the starting code for the application, with
+`index.js` being the entry point for webpack.
 
 ```javascript
-import './index.css'
+import '../modules/todo-vanilla'
+```
+
+We break this down into components, in this case custom elements. Note that
+each element is included via `../modules/{element-name}` directory. This is
+just a convention where each such file contains all the includes needed for
+that element. For example, the `elements/todo-vanilla/index.js` file contains
+both the CSS and the JS needed to use the `<todo-vanilla>` element. All
+custom elements must have a '-' in their name, and I've adopted the convention
+of appending '-vanilla'.
+
+There is only one element and that's the `<todo-vanilla>` element:
+
+```javascript
 import { bind, wire } from  '../node_modules/hyperhtml/esm/index.js'
 
 window.customElements.define('todo-vanilla', class extends HTMLElement {
@@ -106,9 +120,7 @@ The templating is handled by the
 Caveats
 =======
 
-1. The `webpack.config.js` builds a developement version of the code, no
-   minimization or other optimizations are done to JS, HTML, CSS, or images.
-2. This code works w/o polyfils in Chrome. To get it to run in a wider range
+1. This code works w/o polyfils in Chrome. To get it to run in a wider range
    of browsers you will need to add polyfills and, depending on the target
    browser version, compile the JS back to an older version of ES, and run a
    prefixer on the CSS. The wider the target set of browsers and the older the
