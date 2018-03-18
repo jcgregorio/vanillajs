@@ -1,6 +1,5 @@
-import { html, render } from '../node_modules/lit-html/lib/lit-extended.js'
-
-window.customElements.define('square-vanilla', class extends HTMLElement {});
+import '../square-vanilla'
+import { html, render } from 'lit-html/lib/lit-extended.js'
 
 const template = (squares) => html`
 <div class=boardRow>

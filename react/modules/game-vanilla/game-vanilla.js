@@ -1,4 +1,5 @@
-import { html, render } from '../node_modules/lit-html/lib/lit-extended.js'
+import '../board-vanilla'
+import { html, render } from 'lit-html/lib/lit-extended.js'
 
 // Declare some functions that are used in templating.
 function calculateWinner(squares) {

@@ -16,50 +16,57 @@ Running
 
 To install all dependencies and run the developement server:
 
-     $ make dev
+     $ make serve
 
 To build the production version of the assets:
 
-     $ make
+     $ make release
 
 All the production assets will appear in the `./dist` directory.
 
 Contents
 ========
 
-		.
-		├── elements
-		│   ├── board-vanilla.css
-		│   ├── board-vanilla.js
-		│   ├── board-vanilla.webpack.js
-		│   ├── game-vanilla.css
-		│   ├── game-vanilla.js
-		│   └── game-vanilla.webpack.js
-		├── Makefile
-		├── package.json
-		├── src
-		│   ├── index.css
-		│   ├── index.html
-		│   └── index.js
-		└── webpack.config.js
+The directory structure follows the recommended
+[pulito](https://www.npmjs.com/package/pulito) form and also uses
+pulito for the core of the webpack config.
 
-The `src` directory contains the starting code for the application, with
+    .
+    ├── Makefile
+    ├── modules
+    │   ├── board-vanilla
+    │   │   ├── board-vanilla.css
+    │   │   ├── board-vanilla.js
+    │   │   └── index.js
+    │   ├── game-vanilla
+    │   │   ├── game-vanilla.css
+    │   │   ├── game-vanilla.js
+    │   │   └── index.js
+    │   └── square-vanilla
+    │       ├── index.js
+    │       └── square-vanilla.js
+    ├── package.json
+    ├── pages
+    │   ├── index.css
+    │   ├── index.html
+    │   └── index.js
+    └── webpack.config.js
+
+The `pages` directory contains the starting code for the application, with
 `index.js` being the entry point for webpack.
 
 ```javascript
-import '../elements/board-vanilla.webpack.js'
-import '../elements/game-vanilla.webpack.js'
+import '../modules/game-vanilla'
 import './index.css'
 ```
 
 Just like in the React tutorial we break this down into components, in this
-case custom elements. Note that each element is included via `*.webpack.js`
-file. This is just a convention where each such file contains all the
-includes needed for that element. For example, the
-`elements/board-vanilla.webpack.js` file contains both the CSS and the JS
-needed to use the `<board-vanilla>` element. All custom elements must have
-a '-' in their name, and I've adopted the convention of appending
-'-vanilla'.
+case custom elements. Note that each element is included via
+`../modules/{element-name}` directory. This is just a convention where each
+such file contains all the includes needed for that element. For example, the
+`elements/board-vanilla/index.js` file contains both the CSS and the JS needed
+to use the `<board-vanilla>` element. All custom elements must have a '-' in
+their name, and I've adopted the convention of appending '-vanilla'.
 
 The `<square-vanilla>` element is the simplest custom element of all:
 
@@ -219,9 +226,7 @@ applications together using custom elements. The full six are detailed in my
 Caveats
 =======
 
-1. The `webpack.config.js` builds a developement version of the code, no
-   minimization or other optimizations are done to JS, HTML, CSS, or images.
-2. This code works w/o polyfils in Chrome. To get it to run in a wider range
+1. This code works w/o polyfils in Chrome. To get it to run in a wider range
    of browsers you will need to add polyfills and, depending on the target
    browser version, compile the JS back to an older version of ES, and run a
    prefixer on the CSS. The wider the target set of browsers and the older the

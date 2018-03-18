@@ -1,0 +1,4 @@
+board-vanilla {
+  display: flex;
+  flex-direction: column;
+}

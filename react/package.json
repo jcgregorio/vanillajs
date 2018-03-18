@@ -1,7 +1,6 @@
 {
-  "devDependencies": {
+  "dependencies": {
     "lit-html": "^0.7.1",
-    "webpack": "3.10.0",
-    "webpack-dev-server": "^3.0.0-alpha6"
+    "pulito": "^2.2.0"
   }
 }

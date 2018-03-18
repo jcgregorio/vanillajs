@@ -12,9 +12,3 @@ square-vanilla {
   text-align: center;
   width: 34px;
 }
-
-board-vanilla {
-  display: flex;
-  flex-direction: column;
-}
-
