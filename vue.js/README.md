@@ -16,11 +16,11 @@ Running
 
 To install all dependencies and run the developement server:
 
-     $ make dev
+     $ make serve
 
 To build the production version of the assets:
 
-     $ make
+     $ make release
 
 All the production assets will appear in the `./dist` directory.
 
@@ -28,39 +28,45 @@ All the production assets will appear in the `./dist` directory.
 Contents
 ========
 
+The directory structure follows the recommended
+[pulito](https://www.npmjs.com/package/pulito) form and also uses
+pulito for the core of the webpack config.
+
     .
-    ├── elements
-    │   ├── images
-    │   │   └── placeholder.png
-    │   ├── post-van.css
-    │   ├── post-van.js
-    │   ├── post-van.webpack.js
-    │   ├── subreddit-van.css
-    │   ├── subreddit-van.js
-    │   └── subreddit-van.webpack.js
+    ├── images
+    │   └── placeholder.png
     ├── Makefile
+    ├── modules
+    │   ├── post-van
+    │   │   ├── index.js
+    │   │   ├── post-van.css
+    │   │   └── post-van.js
+    │   └── subreddit-van
+    │       ├── index.js
+    │       ├── subreddit-van.css
+    │       └── subreddit-van.js
     ├── package.json
-    ├── src
-    │   ├── index.css
-    │   ├── index.html
-    │   └── index.js
+    ├── pages
+    │   ├── index.css
+    │   ├── index.html
+    │   └── index.js
     └── webpack.config.js
 
 
-The `src` directory contains the starting code for the application, with
+The `pages` directory contains the starting code for the application, with
 `index.js` being the entry point for webpack.
 
 ```javascript
-import '../elements/subreddit-van.webpack.js'
-import '../elements/post-van.webpack.js'
+import '../modules/subreddit-van'
+import '../modules/post-van'
 import './index.css'
 ```
 
 Just like in the tutorialzine application the functionality is broken down
 into two components, in this case we make them custom elements. Note that each
-element is included via `*.webpack.js` file. This is just a convention where
-each such file contains all the includes needed for that element. For example,
-the `elements/post-van.webpack.js` file contains both the CSS and the JS
+element is included via `../modules/{element-name}` directory. This is just a convention where
+each such directory contains all the includes needed for that element. For example,
+the `elements/post-van/index.js` file contains both the CSS and the JS
 needed to use the `<post-van>` element. All custom elements must have
 a '-' in their name, and I've adopted the convention of appending '-van' for
 vanilla.
@@ -161,13 +167,10 @@ window.customElements.define('post-van', class extends HTMLElement {
 });
 ```
 
-
 Caveats
 =======
 
-1. The `webpack.config.js` builds a developement version of the code, no
-   minimization or other optimizations are done to JS, HTML, CSS, or images.
-2. This code works w/o polyfils in Chrome. To get it to run in a wider range
+1. This code works w/o polyfils in Chrome. To get it to run in a wider range
    of browsers you will need to add polyfills and, depending on the target
    browser version, compile the JS back to an older version of ES, and run a
    prefixer on the CSS. The wider the target set of browsers and the older the

@@ -1,9 +1,11 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { commonBuilder } = require('pulito');
 
-const common = require('../webpack-common');
+let common = commonBuilder(__dirname);
+
 common.plugins.push(
   new CopyWebpackPlugin([
-    {from:'elements/images',to:'images'}
+    {from:'images',to:'images'}
   ])
 );
 
