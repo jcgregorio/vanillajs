@@ -9,7 +9,6 @@ Prereqs
 You should have the following installed:
 
 1. node - A version recent enough to have npx.
-2. yarn.
 
 Running
 =======
