@@ -1,14 +1,11 @@
-default: yarn.lock
-	npx webpack
+default: package-lock.json
+	npx webpack --mode=development
 
-serve: yarn.lock
+serve: package-lock.json
 	npx webpack-dev-server --watch
 
-release: yarn.lock
-	NODE_ENV=production npx webpack
+release: package-lock.json
+	npx webpack --mode=production
 
-yarn.lock: node_modules package.json
-	yarn install
-
-node_modules:
-	mkdir -p node_modules
+package-lock.json: package.json
+	npm update

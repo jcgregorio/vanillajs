@@ -7,8 +7,5 @@ serve: package-lock.json
 release: package-lock.json
 	npx webpack --mode=production
 
-package-lock.json: node_modules package.json
+package-lock.json: package.json
 	npm update
-
-node_modules:
-	mkdir -p node_modules
